@@ -61,11 +61,13 @@ class _SearchFieldState extends State<SearchField> {
       ),*/
 
           TextField(
+        style: TextStyle(fontSize: 16),
         controller: _searchController,
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white,
           hintText: AppStrings.SEARCH,
+          hintStyle: TextStyle(fontSize: 16),
           prefixIcon: Icon(Icons.search),
           suffixIcon: _showClearButton
               ? IconButton(
