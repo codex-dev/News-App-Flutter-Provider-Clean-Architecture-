@@ -1,17 +1,19 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:news_app/constants/app_routes.dart';
 import 'package:news_app/constants/app_strings.dart';
 import 'package:news_app/screens/widgets/search_field.dart';
 
-class SearchNews extends StatefulWidget {
-  const SearchNews({super.key});
+class SearchNewsScreen extends StatefulWidget {
+  const SearchNewsScreen({super.key});
 
   @override
-  State<SearchNews> createState() => _SearchNewsState();
+  State<SearchNewsScreen> createState() => _SearchNewsScreenState();
 }
 
-class _SearchNewsState extends State<SearchNews> {
+class _SearchNewsScreenState extends State<SearchNewsScreen> {
   @override
   Widget build(BuildContext context) {
     var themeColor = Theme.of(context).colorScheme.primary;
@@ -39,10 +41,24 @@ class _SearchNewsState extends State<SearchNews> {
               //   width: 10,
               // ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  GoRouter.of(context)
+                      .pushNamed(AppRoutes.PREVIEW_NEWS_ROUTE
+                      /*,
+                      pathParameters: {
+                    'imgUrl': '',
+                    'pubDate': '',
+                    'author': '',
+                    'title': '',
+                    'description': '',
+                    'content': '',
+                    'articleUrl': ''
+                  }*/
+                  );
+                },
                 child: Text(
                   AppStrings.CANCEL,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
               ),
             ],
@@ -50,7 +66,6 @@ class _SearchNewsState extends State<SearchNews> {
         ),
         Expanded(
             child: Container(
-          color: Colors.amber,
         ))
       ]),
     );
