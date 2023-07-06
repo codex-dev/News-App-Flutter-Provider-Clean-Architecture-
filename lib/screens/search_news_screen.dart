@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:news_app/constants/app_routes.dart';
 import 'package:news_app/constants/app_strings.dart';
+import 'package:news_app/models/news_article.dart';
 import 'package:news_app/screens/widgets/search_field.dart';
 
 class SearchNewsScreen extends StatefulWidget {
@@ -42,19 +43,7 @@ class _SearchNewsScreenState extends State<SearchNewsScreen> {
               // ),
               TextButton(
                 onPressed: () {
-                  GoRouter.of(context)
-                      .pushNamed(AppRoutes.PREVIEW_NEWS_ROUTE
-                      /*,
-                      pathParameters: {
-                    'imgUrl': '',
-                    'pubDate': '',
-                    'author': '',
-                    'title': '',
-                    'description': '',
-                    'content': '',
-                    'articleUrl': ''
-                  }*/
-                  );
+                  loadPreviewScreen();
                 },
                 child: Text(
                   AppStrings.CANCEL,
@@ -64,10 +53,24 @@ class _SearchNewsScreenState extends State<SearchNewsScreen> {
             ],
           ),
         ),
-        Expanded(
-            child: Container(
-        ))
+        Expanded(child: Container())
       ]),
     );
+  }
+
+  void loadPreviewScreen() {
+    Article article = Article(
+        imgUrl:
+            'https://static1.anpoimages.com/wordpress/wp-content/uploads/2023/06/use-iphone-secret-trackpad.jpg',
+        //'https://i.ibb.co/rywTgwQ/concepto-ios-17.jpg', // 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/African_Bush_Elephant.jpg/800px-African_Bush_Elephant.jpg',
+        source: 'Android Police',
+        pubDate: '05 Jul 2023',
+        title: 'This is the title of the news article',
+        description: 'A brief description of the news article',
+        content: 'Here goes the content of the article',
+        articleUrl:
+            'https://www.androidpolice.com/apple-iphone-secret-trackpad-how-to/');
+    GoRouter.of(context)
+        .pushNamed(AppRoutes.PREVIEW_NEWS_ROUTE, extra: article);
   }
 }

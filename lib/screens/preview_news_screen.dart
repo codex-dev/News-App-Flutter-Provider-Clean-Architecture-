@@ -2,9 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:news_app/constants/app_strings.dart';
+import 'package:news_app/models/news_article.dart';
 
 class PreviewNewsScreen extends StatelessWidget {
-  const PreviewNewsScreen({super.key});
+  const PreviewNewsScreen({super.key, required this.article });
+  final Article article;
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +39,7 @@ class PreviewNewsScreen extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
                 child: Image.network(
-                    'https://i.ibb.co/rywTgwQ/concepto-ios-17.jpg',
-                    // 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/African_Bush_Elephant.jpg/800px-African_Bush_Elephant.jpg',
+                    article.imgUrl,
                     height: 200,
                     fit: BoxFit.fitWidth),
               ),
@@ -50,14 +51,14 @@ class PreviewNewsScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "The Guardian",
+                  article.source,
                   style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                       fontSize: 16),
                 ),
                 Text(
-                  "05 Jul 2023",
+                  article.pubDate,
                   style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -68,7 +69,7 @@ class PreviewNewsScreen extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(top: 15),
               child: Text(
-                "This is the title of the news article",
+                article.title,
                 style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.normal,
@@ -78,7 +79,7 @@ class PreviewNewsScreen extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(top: 15),
               child: Text(
-                "A brief description of the news article",
+                article.description,
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -88,7 +89,7 @@ class PreviewNewsScreen extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(top: 15),
               child: Text(
-                "Here goes the content of the article",
+                article.content,
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.normal,
