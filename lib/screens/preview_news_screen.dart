@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/constants/app_strings.dart';
 import 'package:news_app/models/news_article.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PreviewNewsScreen extends StatelessWidget {
   const PreviewNewsScreen({super.key, required this.article });
@@ -101,7 +102,14 @@ class PreviewNewsScreen extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: themeColor),
-                  onPressed: () {},
+                  onPressed: () async {
+                    Uri url = Uri.parse(article.articleUrl);
+                    if(await canLaunchUrl(url)){
+                      await launchUrl(url);
+                    }else {
+                      throw 'Could not launch $url';
+                    }
+                  },
                   child: Text(
                     AppStrings.READ_FULL_ARTICLE,
                     style: TextStyle(
