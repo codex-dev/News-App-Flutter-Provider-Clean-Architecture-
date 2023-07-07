@@ -1,19 +1,23 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:news_app/config/api_config.dart';
 import 'package:news_app/constants/app_strings.dart';
-import 'package:news_app/models/news_article.dart';
+import 'package:news_app/models/news_response.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PreviewNewsScreen extends StatelessWidget {
-  const PreviewNewsScreen({super.key, required this.article });
+  const PreviewNewsScreen({super.key, required this.article});
+
   final Article article;
 
   @override
   Widget build(BuildContext context) {
     var themeColor = Theme.of(context).colorScheme.primary;
 
-    return Scaffold(
+    return SafeArea(
+        child: Scaffold(
       appBar: AppBar(
         leading: BackButton(
           color: Colors.white,
@@ -40,7 +44,7 @@ class PreviewNewsScreen extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
                 child: Image.network(
-                    article.imgUrl,
+                    article.urlToImage ?? ApiConfig.IMAGE_NOT_FOUND,
                     height: 200,
                     fit: BoxFit.fitWidth),
               ),
@@ -52,14 +56,15 @@ class PreviewNewsScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  article.source,
+                  article.source!.name ?? '',
                   style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                       fontSize: 16),
                 ),
                 Text(
-                  article.pubDate,
+                  DateFormat("dd MMM yyyy")
+                      .format(DateTime.parse(article.publishedAt!)),
                   style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -70,7 +75,7 @@ class PreviewNewsScreen extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(top: 15),
               child: Text(
-                article.title,
+                article.title ?? '',
                 style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.normal,
@@ -80,7 +85,7 @@ class PreviewNewsScreen extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(top: 15),
               child: Text(
-                article.description,
+                article.description ?? '',
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -90,7 +95,7 @@ class PreviewNewsScreen extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(top: 15),
               child: Text(
-                article.content,
+                article.content ?? '',
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.normal,
@@ -103,11 +108,13 @@ class PreviewNewsScreen extends StatelessWidget {
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: themeColor),
                   onPressed: () async {
-                    Uri url = Uri.parse(article.articleUrl);
-                    if(await canLaunchUrl(url)){
+                    Uri url = Uri.parse(article.url ?? '');
+                    if (await canLaunchUrl(url)) {
                       await launchUrl(url);
-                    }else {
-                      throw 'Could not launch $url';
+                    } else {
+                      debugPrint('Could not launch $url');
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('Could not open news article')));
                     }
                   },
                   child: Text(
@@ -121,6 +128,6 @@ class PreviewNewsScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }

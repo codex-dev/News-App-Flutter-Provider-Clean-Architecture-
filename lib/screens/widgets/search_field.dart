@@ -48,21 +48,14 @@ class _SearchFieldState extends State<SearchField> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child:
-          /*SearchBar(
-        controller: _searchController,
-        leading: 
-          IconButton(
-              onPressed: () {
-                _showMessage
-              },
-              icon: Icon(Icons.search)),
-        hintText: AppStrings.SEARCH,
-      ),*/
-
-          TextField(
+      child: TextField(
         style: TextStyle(fontSize: 16),
         controller: _searchController,
+        onSubmitted: (value) {
+          if (value.isNotEmpty) {
+            //TODO
+          }
+        },
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white,
@@ -78,14 +71,14 @@ class _SearchFieldState extends State<SearchField> {
             borderSide: BorderSide(width: 3, color: Colors.white),
             borderRadius: BorderRadius.circular(15.0),
           ),
-          focusedBorder: OutlineInputBorder(
+          /*focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(width: 3, color: Colors.white),
             borderRadius: BorderRadius.circular(15.0),
           ),
           errorBorder: OutlineInputBorder(
             borderSide: BorderSide(width: 3, color: Colors.red),
             borderRadius: BorderRadius.circular(15.0),
-          ),
+          ),*/
         ),
       ),
     );

@@ -5,10 +5,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app/screens/preview_news_screen.dart';
 import 'package:news_app/screens/search_news_screen.dart';
 
-import 'app_route_config.dart';
+import 'config/route_config.dart';
 
 void main() {
-  runApp(NewsApp());
+  runApp(ProviderScope(child: NewsApp()));
 }
 
 class NewsApp extends StatelessWidget {
@@ -17,15 +17,11 @@ class NewsApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: NewsAppRouter.returnRouter(),
       debugShowCheckedModeBanner: false,
-      // routeInformationParser:
-      //     NewsAppRouter.returnRouter(false).routeInformationParser,
-      // routerDelegate: NewsAppRouter.returnRouter(false).routerDelegate,
       title: 'News App',
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
-      // home: SearchNews(),
     );
   }
 }
