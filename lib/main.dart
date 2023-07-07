@@ -2,8 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:news_app/screens/preview_news_screen.dart';
-import 'package:news_app/screens/search_news_screen.dart';
 
 import 'config/route_config.dart';
 

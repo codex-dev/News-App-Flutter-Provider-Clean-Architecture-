@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$NewsState {
   bool get isLoading => throw _privateConstructorUsedError;
+
   NewsResponse get newsResponse => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -28,6 +29,7 @@ mixin _$NewsState {
 abstract class $NewsStateCopyWith<$Res> {
   factory $NewsStateCopyWith(NewsState value, $Res Function(NewsState) then) =
       _$NewsStateCopyWithImpl<$Res, NewsState>;
+
   @useResult
   $Res call({bool isLoading, NewsResponse newsResponse});
 }
@@ -39,6 +41,7 @@ class _$NewsStateCopyWithImpl<$Res, $Val extends NewsState>
 
   // ignore: unused_field
   final $Val _value;
+
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -66,6 +69,7 @@ abstract class _$$_NewsStateCopyWith<$Res> implements $NewsStateCopyWith<$Res> {
   factory _$$_NewsStateCopyWith(
           _$_NewsState value, $Res Function(_$_NewsState) then) =
       __$$_NewsStateCopyWithImpl<$Res>;
+
   @override
   @useResult
   $Res call({bool isLoading, NewsResponse newsResponse});
@@ -140,12 +144,15 @@ abstract class _NewsState extends NewsState {
   const factory _NewsState(
       {final bool isLoading,
       required final NewsResponse newsResponse}) = _$_NewsState;
+
   const _NewsState._() : super._();
 
   @override
   bool get isLoading;
+
   @override
   NewsResponse get newsResponse;
+
   @override
   @JsonKey(ignore: true)
   _$$_NewsStateCopyWith<_$_NewsState> get copyWith =>

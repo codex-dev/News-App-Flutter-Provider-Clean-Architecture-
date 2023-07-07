@@ -31,4 +31,3 @@ class NewsNotifier extends StateNotifier<NewsState> {
 
 final newsProvider =
     StateNotifierProvider<NewsNotifier, NewsState>((ref) => NewsNotifier());
-
