@@ -11,7 +11,7 @@ class NewsService {
         "&searchIn=title"
         "&language=en"
         "&sortBy=publishedAt"
-        "&pageSize=10"
+        "&pageSize=100"
         "&page=1"
         "&apiKey=094abddfda1944fb87d868677f3005ee");
 

@@ -15,15 +15,20 @@ class NewsState with _$NewsState {
   const NewsState._();
 }
 
-class NewsNotifier extends StateNotifier<NewsState>{
-  NewsNotifier(): super(NewsState(newsResponse: NewsResponse(articles:[])));
+class NewsNotifier extends StateNotifier<NewsState> {
+  NewsNotifier() : super(NewsState(newsResponse: NewsResponse(articles: []))) {
+    state = state.copyWith(
+        isLoading: false); // make progressbar disappear in the begining
+  }
 
   loadSearchedNews(String query) async {
     state = state.copyWith(isLoading: true);
     final response = await NewsService().fetchNews(query);
     final news = NewsResponse.fromJson(response);
-    state = state.copyWith(newsResponse: news,isLoading: false);
+    state = state.copyWith(newsResponse: news, isLoading: false);
   }
 }
 
-final newsProvider = StateNotifierProvider<NewsNotifier,NewsState>((ref)=> NewsNotifier());
+final newsProvider =
+    StateNotifierProvider<NewsNotifier, NewsState>((ref) => NewsNotifier());
+

@@ -1,16 +1,19 @@
 // ignore_for_file: prefer_const_constructors, prefer_final_fields
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app/constants/app_strings.dart';
 
-class SearchField extends StatefulWidget {
+import '../../providers/news_provider.dart';
+
+class SearchField extends ConsumerStatefulWidget {
   const SearchField({super.key});
 
   @override
-  State<SearchField> createState() => _SearchFieldState();
+  ConsumerState<SearchField> createState() => _SearchFieldState();
 }
 
-class _SearchFieldState extends State<SearchField> {
+class _SearchFieldState extends ConsumerState<SearchField> {
   TextEditingController _searchController = TextEditingController();
   bool _showClearButton = false;
 
@@ -39,21 +42,22 @@ class _SearchFieldState extends State<SearchField> {
     });
   }
 
-  void _showMessage() {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text("Searching..."),
-    ));
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return SizedBox.fromSize(
+      size: Size.fromHeight(50.0),
       child: TextField(
-        style: TextStyle(fontSize: 16),
+        style: TextStyle(
+          fontSize: 18,
+        ),
         controller: _searchController,
         onSubmitted: (value) {
           if (value.isNotEmpty) {
-            //TODO
+            ref.read(newsProvider.notifier).loadSearchedNews(value);
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text("Please input search query"),
+            ));
           }
         },
         decoration: InputDecoration(
@@ -64,18 +68,17 @@ class _SearchFieldState extends State<SearchField> {
           prefixIcon: Icon(Icons.search),
           suffixIcon: _showClearButton
               ? IconButton(
-                  onPressed: _showMessage,
-                  icon: Icon(Icons.arrow_forward_rounded))
+                  onPressed: _clearSearchText, icon: Icon(Icons.close_rounded))
               : null,
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(width: 3, color: Colors.white),
             borderRadius: BorderRadius.circular(15.0),
           ),
-          /*focusedBorder: OutlineInputBorder(
+          focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(width: 3, color: Colors.white),
             borderRadius: BorderRadius.circular(15.0),
           ),
-          errorBorder: OutlineInputBorder(
+          /*errorBorder: OutlineInputBorder(
             borderSide: BorderSide(width: 3, color: Colors.red),
             borderRadius: BorderRadius.circular(15.0),
           ),*/
