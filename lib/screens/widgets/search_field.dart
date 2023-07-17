@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app/constants/app_strings.dart';
@@ -68,7 +67,8 @@ class _SearchFieldState extends ConsumerState<SearchField> {
           prefixIcon: const Icon(Icons.search),
           suffixIcon: _showClearButton
               ? IconButton(
-                  onPressed: _clearSearchText, icon: const Icon(Icons.close_rounded))
+                  onPressed: _clearSearchText,
+                  icon: const Icon(Icons.close_rounded))
               : null,
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(width: 3, color: Colors.white),

@@ -13,80 +13,80 @@ class NewsListItem extends StatelessWidget {
   const NewsListItem({Key? key, required this.article}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) { return SizedBox(
-      height: 165,
-      child: Container(
-          padding: const EdgeInsets.all(10),
-          margin: const EdgeInsets.only(top: 10, left: 15, right: 15),
-          height: 130,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 1,
-                blurRadius: 5,
-                offset: const Offset(0, 3), // changes position of shadow
-              ),
-            ],
-          ),
-          child: InkWell(
-              onTap: () {
-                loadPreviewNewsScreen(context);
-              },
-              child:
-              Row(
-              crossAxisAlignment: CrossAxisAlignment.center, children: [
-              ClipRRect(
-              borderRadius: BorderRadius.circular(5),
-              child: loadImage()),
-          const SizedBox(
-            width: 10,
-          ),
-          Expanded(
-              flex: 1,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      article.title ?? '',
-                      maxLines: 2,
-                      style: const TextStyle(
-                          fontSize: 18,
-                          color: Colors.black,
-                          fontWeight: FontWeight.normal),
-                    ),
-                    SizedBox.fromSize(
-                      size: const Size.fromHeight(5),
-                    ),
-                    Text(
-                      article.content ?? '',
-                      maxLines: 2,
-                      style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey,
-                          fontWeight: FontWeight.normal),
-                    ),
-                    SizedBox.fromSize(
-                      size: const Size.fromHeight(5),
-                    ),
-                    Text(
-                      DateFormat(AppStrings.dateFormat)
-                          .format(DateTime.parse(article.publishedAt!)),
-                      style: const TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14),
-                    )
-                  ]))
-          ]))));
+  Widget build(BuildContext context) {
+    return SizedBox(
+        height: 165,
+        child: Container(
+            padding: const EdgeInsets.all(10),
+            margin: const EdgeInsets.only(top: 10, left: 15, right: 15),
+            height: 130,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 1,
+                  blurRadius: 5,
+                  offset: const Offset(0, 3), // changes position of shadow
+                ),
+              ],
+            ),
+            child: InkWell(
+                onTap: () {
+                  loadPreviewNewsScreen(context);
+                },
+                child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: loadImage()),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                          flex: 1,
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  article.title ?? '',
+                                  maxLines: 2,
+                                  style: const TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.normal),
+                                ),
+                                SizedBox.fromSize(
+                                  size: const Size.fromHeight(5),
+                                ),
+                                Text(
+                                  article.content ?? '',
+                                  maxLines: 2,
+                                  style: const TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.normal),
+                                ),
+                                SizedBox.fromSize(
+                                  size: const Size.fromHeight(5),
+                                ),
+                                Text(
+                                  DateFormat(AppStrings.dateFormat).format(
+                                      DateTime.parse(article.publishedAt!)),
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14),
+                                )
+                              ]))
+                    ]))));
   }
 
   void loadPreviewNewsScreen(BuildContext context) {
-    GoRouter.of(context)
-        .pushNamed(AppRoutes.previewNewsRoute, extra: article);
+    GoRouter.of(context).pushNamed(AppRoutes.previewNewsRoute, extra: article);
   }
 
   Image loadImage() {
