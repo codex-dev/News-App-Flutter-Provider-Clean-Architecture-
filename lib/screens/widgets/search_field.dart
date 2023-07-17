@@ -51,6 +51,7 @@ class _SearchFieldState extends ConsumerState<SearchField> {
           fontSize: 18,
         ),
         controller: _searchController,
+        textInputAction: TextInputAction.search,
         onSubmitted: (value) {
           if (value.isNotEmpty) {
             ref.read(newsProvider.notifier).loadSearchedNews(value);

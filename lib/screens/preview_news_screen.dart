@@ -102,15 +102,19 @@ class PreviewNewsScreen extends StatelessWidget {
                     child: Align(
                   alignment: Alignment.bottomCenter,
                   child: ElevatedButton(
-                      style:
-                          ElevatedButton.styleFrom(backgroundColor: themeColor),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: themeColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
                       onPressed: () async {
                         Uri url = Uri.parse(article.url ?? '');
                         if (await canLaunchUrl(url)) {
                           await launchUrl(url);
                         } else {
                           debugPrint('Could not launch $url');
-                         }
+                        }
                       },
                       child: Text(
                         AppStrings.READ_FULL_ARTICLE,

@@ -18,7 +18,7 @@ class NewsState with _$NewsState {
 class NewsNotifier extends StateNotifier<NewsState> {
   NewsNotifier() : super(NewsState(newsResponse: NewsResponse(articles: []))) {
     state = state.copyWith(
-        isLoading: false); // make progressbar disappear in the begining
+        isLoading: false); // initial state; progressbar is hidden
   }
 
   loadSearchedNews(String query) async {
