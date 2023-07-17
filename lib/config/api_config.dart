@@ -1,5 +1,5 @@
 class ApiConfig {
-  static const String BASE_URL = 'https://newsapi.org/';
-  static const String IMAGE_NOT_FOUND =
+  static const String baseUrl = 'https://newsapi.org/';
+  static const String imageNotFoundPlaceholderUrl =
       'https://i.ibb.co/bLrKgVk/media-Event-Image-Not-Found.jpg';
 }

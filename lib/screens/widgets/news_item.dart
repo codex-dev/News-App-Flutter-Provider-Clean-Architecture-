@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:news_app/constants/app_strings.dart';
 
 import '../../config/api_config.dart';
 import '../../constants/app_routes.dart';
@@ -72,7 +73,7 @@ class NewsListItem extends StatelessWidget {
                       size: const Size.fromHeight(5),
                     ),
                     Text(
-                      DateFormat("dd MMM yyyy")
+                      DateFormat(AppStrings.dateFormat)
                           .format(DateTime.parse(article.publishedAt!)),
                       style: const TextStyle(
                           color: Colors.black,
@@ -85,7 +86,7 @@ class NewsListItem extends StatelessWidget {
 
   void loadPreviewNewsScreen(BuildContext context) {
     GoRouter.of(context)
-        .pushNamed(AppRoutes.PREVIEW_NEWS_ROUTE, extra: article);
+        .pushNamed(AppRoutes.previewNewsRoute, extra: article);
   }
 
   Image loadImage() {
@@ -100,7 +101,7 @@ class NewsListItem extends StatelessWidget {
     } catch (e) {
       debugPrint('Image loading failed : ${article.urlToImage}');
       image = Image.network(
-        ApiConfig.IMAGE_NOT_FOUND,
+        ApiConfig.imageNotFoundPlaceholderUrl,
         width: 100,
         height: 100,
         fit: BoxFit.cover,

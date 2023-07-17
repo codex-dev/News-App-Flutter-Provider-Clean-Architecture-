@@ -1,8 +1,8 @@
-// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app/config/api_config.dart';
+import 'package:news_app/constants/app_colors.dart';
 import 'package:news_app/constants/app_strings.dart';
 import 'package:news_app/models/news_response.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -18,7 +18,7 @@ class PreviewNewsScreen extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          leading: BackButton(
+          leading: const BackButton(
             color: Colors.white,
           ),
           // IconButton(
@@ -29,8 +29,8 @@ class PreviewNewsScreen extends StatelessWidget {
         ),
         body: SafeArea(
           child: Container(
-            color: const Color(0xffF8F9FD),
-            padding: EdgeInsets.all(15),
+            color: AppColors.backgroundColor,
+            padding: const EdgeInsets.all(15),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -42,7 +42,7 @@ class PreviewNewsScreen extends StatelessWidget {
                     child: loadImage(),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Row(
@@ -50,15 +50,15 @@ class PreviewNewsScreen extends StatelessWidget {
                   children: [
                     Text(
                       article.source!.name ?? '',
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
                           fontSize: 16),
                     ),
                     Text(
-                      DateFormat("dd MMM yyyy")
+                      DateFormat(AppStrings.dateFormat)
                           .format(DateTime.parse(article.publishedAt!)),
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
                           fontSize: 16),
@@ -66,33 +66,33 @@ class PreviewNewsScreen extends StatelessWidget {
                   ],
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 20),
+                  margin: const EdgeInsets.only(top: 20),
                   child: Text(
                     article.title ?? '',
                     maxLines: 3,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.normal,
                         color: Colors.black),
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 20),
+                  margin: const EdgeInsets.only(top: 20),
                   child: Text(
                     article.description ?? '',
                     maxLines: 3,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Colors.grey),
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 20),
+                  margin: const EdgeInsets.only(top: 20),
                   child: Text(
                     article.content ?? '',
                     maxLines: 7,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.normal,
                         color: Colors.grey),
@@ -116,8 +116,8 @@ class PreviewNewsScreen extends StatelessWidget {
                           debugPrint('Could not launch $url');
                         }
                       },
-                      child: Text(
-                        AppStrings.READ_FULL_ARTICLE,
+                      child: const Text(
+                        AppStrings.readFullArticle,
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.normal,
@@ -138,7 +138,7 @@ class PreviewNewsScreen extends StatelessWidget {
     } catch (e) {
       debugPrint('Image loading failed : ${article.urlToImage}');
       image = Image.network(
-        ApiConfig.IMAGE_NOT_FOUND,
+        ApiConfig.imageNotFoundPlaceholderUrl,
         height: 200,
         fit: BoxFit.cover,
       );

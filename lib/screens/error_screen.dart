@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:news_app/constants/app_routes.dart';
+import 'package:news_app/constants/app_strings.dart';
 
 class ErrorScreen extends StatelessWidget {
   const ErrorScreen({super.key});
@@ -10,14 +11,14 @@ class ErrorScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
-        title: Text('Error Screen'),
+        title: const Text(AppStrings.errorScreen),
       ),
       body: Center(
         child: ElevatedButton(
             onPressed: () {
-              GoRouter.of(context).pushNamed(AppRoutes.HOME_ROUTE);
+              GoRouter.of(context).pushNamed(AppRoutes.homeRoute);
             },
-            child: Text('Go to Home page')),
+            child: const Text(AppStrings.goToHomepage)),
       ),
     );
   }

@@ -1,7 +1,7 @@
-// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:news_app/constants/app_colors.dart';
 import 'package:news_app/constants/app_strings.dart';
 import 'package:news_app/models/news_response.dart';
 import 'package:news_app/providers/news_provider.dart';
@@ -20,8 +20,8 @@ class SearchNewsScreen extends ConsumerWidget {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text(
-            AppStrings.NEWS_FEED,
+          title: const Text(
+            AppStrings.newsFeed,
             style: TextStyle(color: Colors.white),
           ),
           backgroundColor: themeColor,
@@ -29,15 +29,15 @@ class SearchNewsScreen extends ConsumerWidget {
               preferredSize: const Size.fromHeight(70.0),
               child: Container(
                 color: themeColor,
-                padding: EdgeInsets.all(16.0),
-                child: SearchField(),
+                padding: const EdgeInsets.all(16.0),
+                child: const SearchField(),
               )),
         ),
         body: SafeArea(
             child: Container(
-                color: const Color(0xffF8F9FD),
+                color: AppColors.backgroundColor,
                 child: isLoading
-                    ? Center(
+                    ? const Center(
                         child: CircularProgressIndicator(),
                       )
                     : ListView.builder(

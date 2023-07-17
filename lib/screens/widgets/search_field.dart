@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_final_fields
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,7 +13,7 @@ class SearchField extends ConsumerStatefulWidget {
 }
 
 class _SearchFieldState extends ConsumerState<SearchField> {
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   bool _showClearButton = false;
 
   @override
@@ -45,9 +44,9 @@ class _SearchFieldState extends ConsumerState<SearchField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox.fromSize(
-      size: Size.fromHeight(50.0),
+      size: const Size.fromHeight(50.0),
       child: TextField(
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 18,
         ),
         controller: _searchController,
@@ -56,27 +55,27 @@ class _SearchFieldState extends ConsumerState<SearchField> {
           if (value.isNotEmpty) {
             ref.read(newsProvider.notifier).loadSearchedNews(value);
           } else {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text("Please input search query"),
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text(AppStrings.errInputSearchQuery),
             ));
           }
         },
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white,
-          hintText: AppStrings.SEARCH,
-          hintStyle: TextStyle(fontSize: 16),
-          prefixIcon: Icon(Icons.search),
+          hintText: AppStrings.search,
+          hintStyle: const TextStyle(fontSize: 16),
+          prefixIcon: const Icon(Icons.search),
           suffixIcon: _showClearButton
               ? IconButton(
-                  onPressed: _clearSearchText, icon: Icon(Icons.close_rounded))
+                  onPressed: _clearSearchText, icon: const Icon(Icons.close_rounded))
               : null,
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(width: 3, color: Colors.white),
+            borderSide: const BorderSide(width: 3, color: Colors.white),
             borderRadius: BorderRadius.circular(15.0),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(width: 3, color: Colors.white),
+            borderSide: const BorderSide(width: 3, color: Colors.white),
             borderRadius: BorderRadius.circular(15.0),
           ),
           /*errorBorder: OutlineInputBorder(

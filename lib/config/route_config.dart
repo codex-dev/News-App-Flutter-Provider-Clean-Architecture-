@@ -12,13 +12,13 @@ class NewsAppRouter {
     GoRouter router = GoRouter(
         routes: [
           GoRoute(
-              name: AppRoutes.HOME_ROUTE,
+              name: AppRoutes.homeRoute,
               path: '/',
               pageBuilder: (context, state) {
-                return MaterialPage(child: SearchNewsScreen());
+                return const MaterialPage(child: SearchNewsScreen());
               }),
           GoRoute(
-              name: AppRoutes.PREVIEW_NEWS_ROUTE,
+              name: AppRoutes.previewNewsRoute,
               path: '/preview_news',
               pageBuilder: (context, state) {
                 Article article = state.extra as Article;
@@ -26,7 +26,7 @@ class NewsAppRouter {
               }),
         ],
         errorPageBuilder: (context, state) {
-          return MaterialPage(child: ErrorScreen());
+          return const MaterialPage(child: ErrorScreen());
         });
     return router;
   }
