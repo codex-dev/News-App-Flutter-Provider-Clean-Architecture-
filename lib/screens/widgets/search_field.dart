@@ -28,18 +28,6 @@ class _SearchFieldState extends ConsumerState<SearchField> {
     super.dispose();
   }
 
-  void _onSearchTextChanged() {
-    setState(() {
-      _showClearButton = _searchController.text.isNotEmpty;
-    });
-  }
-
-  void _clearSearchText() {
-    setState(() {
-      _searchController.clear();
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return SizedBox.fromSize(
@@ -52,11 +40,9 @@ class _SearchFieldState extends ConsumerState<SearchField> {
         textInputAction: TextInputAction.search,
         onSubmitted: (value) {
           if (value.isNotEmpty) {
-            ref.read(newsProvider.notifier).loadSearchedNews(value,1);
+            ref.read(newsProvider.notifier).loadSearchedNews(value, 1);
           } else {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text(AppStrings.errInputSearchQuery),
-            ));
+            _showErrorPopup();
           }
         },
         decoration: InputDecoration(
@@ -85,5 +71,46 @@ class _SearchFieldState extends ConsumerState<SearchField> {
         ),
       ),
     );
+  }
+
+
+  void _onSearchTextChanged() {
+    setState(() {
+      _showClearButton = _searchController.text.isNotEmpty;
+    });
+  }
+
+  void _clearSearchText() {
+    setState(() {
+      _searchController.clear();
+    });
+  }
+
+  void _showErrorPopup() {
+    ScaffoldMessenger.of(context).showMaterialBanner(MaterialBanner(
+        backgroundColor: Colors.red,
+        leading: const Icon(
+          Icons.error_outline_rounded,
+          color: Colors.white,
+        ),
+        content: const Text(
+          AppStrings.errInputSearchQuery,
+          style: TextStyle(color: Colors.white, fontSize: 16),
+        ),
+        actions: <Widget>[
+          TextButton(
+              onPressed: () => ScaffoldMessenger.of(context)
+                  .hideCurrentMaterialBanner(),
+              child: const Text("Dismiss",style: TextStyle(color: Colors.white,))),
+          /*IconButton(
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+                    },
+                    icon: const Icon(
+                      Icons.close,
+                      color: Colors.white,
+                    ),
+                  ),*/
+        ]));
   }
 }
