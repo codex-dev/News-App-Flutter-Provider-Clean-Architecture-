@@ -98,11 +98,11 @@ class _SearchFieldState extends ConsumerState<SearchField> {
           style: TextStyle(color: Colors.white, fontSize: 16),
         ),
         actions: <Widget>[
-          TextButton(
+          /*TextButton(
               onPressed: () => ScaffoldMessenger.of(context)
                   .hideCurrentMaterialBanner(),
-              child: const Text("Dismiss",style: TextStyle(color: Colors.white,))),
-          /*IconButton(
+              child: const Text("Dismiss",style: TextStyle(color: Colors.white,))),*/
+          IconButton(
                     onPressed: () {
                       ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
                     },
@@ -110,7 +110,7 @@ class _SearchFieldState extends ConsumerState<SearchField> {
                       Icons.close,
                       color: Colors.white,
                     ),
-                  ),*/
+                  ),
         ]));
   }
 }

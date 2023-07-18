@@ -40,6 +40,7 @@ class SearchNewsScreen extends ConsumerWidget {
                         child: CircularProgressIndicator(),
                       )
                     : ListView.builder(
+                        padding: const EdgeInsets.all(15),
                         itemCount: news.articles!.length,
                         itemBuilder: (BuildContext context, int index) {
                           return NewsListItem(article: news.articles![index]);

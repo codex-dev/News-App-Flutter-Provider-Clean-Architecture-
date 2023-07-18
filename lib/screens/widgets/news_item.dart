@@ -18,7 +18,7 @@ class NewsListItem extends StatelessWidget {
         height: 165,
         child: Container(
             padding: const EdgeInsets.all(10),
-            margin: const EdgeInsets.only(top: 10, left: 15, right: 15),
+            margin: const EdgeInsets.only(top: 7.5,bottom: 7.5 ),
             height: 130,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
