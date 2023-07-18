@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app/config/api_config.dart';
 import 'package:news_app/constants/app_colors.dart';
 import 'package:news_app/constants/app_strings.dart';
 import 'package:news_app/models/news_response.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../constants/app_images.dart';
 
 class PreviewNewsScreen extends StatelessWidget {
   const PreviewNewsScreen({super.key, required this.article});
@@ -129,19 +132,26 @@ class PreviewNewsScreen extends StatelessWidget {
         ));
   }
 
-  Image loadImage() {
-    Image image;
-    try {
-      image =
-          Image.network(article.urlToImage!, height: 200, fit: BoxFit.fitWidth);
-    } catch (e) {
-      debugPrint('Image loading failed : ${article.urlToImage}');
-      image = Image.network(
+  Widget loadImage() {
+    if (article.urlToImage == null || article.urlToImage!.isEmpty) {
+      return Image.network(
         ApiConfig.imageNotFoundPlaceholderUrl,
         height: 200,
-        fit: BoxFit.cover,
+        fit: BoxFit.fitWidth,
+      );
+    } else if (article.urlToImage!.trim().toLowerCase().endsWith(".svg")) {
+      return Container(
+          height: 200,
+          alignment: Alignment.center,
+          child: SvgPicture.network(
+            article.urlToImage!,
+          ));
+    } else {
+      return Image.network(
+        article.urlToImage!,
+        height: 200,
+        fit: BoxFit.fitWidth,
       );
     }
-    return image;
   }
 }

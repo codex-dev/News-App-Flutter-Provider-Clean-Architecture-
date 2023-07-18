@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app/constants/app_strings.dart';
@@ -18,7 +19,7 @@ class NewsListItem extends StatelessWidget {
         height: 165,
         child: Container(
             padding: const EdgeInsets.all(10),
-            margin: const EdgeInsets.only(top: 7.5,bottom: 7.5 ),
+            margin: const EdgeInsets.only(top: 7.5, bottom: 7.5),
             height: 130,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
@@ -89,24 +90,29 @@ class NewsListItem extends StatelessWidget {
     GoRouter.of(context).pushNamed(AppRoutes.previewNewsRoute, extra: article);
   }
 
-  Image loadImage() {
-    Image image;
-    try {
-      image = Image.network(
-        article.urlToImage!,
-        width: 100,
-        height: 100,
-        fit: BoxFit.cover,
-      );
-    } catch (e) {
-      debugPrint('Image loading failed : ${article.urlToImage}');
-      image = Image.network(
+  Widget loadImage() {
+    if (article.urlToImage == null || article.urlToImage!.isEmpty) {
+      return Image.network(
         ApiConfig.imageNotFoundPlaceholderUrl,
         width: 100,
         height: 100,
         fit: BoxFit.cover,
       );
+    } else if (article.urlToImage!.trim().toLowerCase().endsWith(".svg")) {
+      return Container(
+          height: 100,
+          width: 100,
+          alignment: Alignment.center,
+          child: SvgPicture.network(
+            article.urlToImage!,
+          ));
+    } else {
+      return Image.network(
+        article.urlToImage!,
+        width: 100,
+        height: 100,
+        fit: BoxFit.cover,
+      );
     }
-    return image;
   }
 }

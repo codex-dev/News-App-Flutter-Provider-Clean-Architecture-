@@ -19,6 +19,7 @@ dependencies:
   dio: ^5.2.1+1 # manage http requests
   freezed_annotation: ^2.4.1 # partial requirement of freezed
   intl: ^0.18.1 # format date and time
+  flutter_svg: ^2.0.7 # display svg images
 
 dev_dependencies:
   flutter_test:
