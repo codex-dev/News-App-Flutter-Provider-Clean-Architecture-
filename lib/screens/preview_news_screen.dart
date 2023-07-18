@@ -5,6 +5,7 @@ import 'package:news_app/config/api_config.dart';
 import 'package:news_app/constants/app_colors.dart';
 import 'package:news_app/constants/app_strings.dart';
 import 'package:news_app/models/news_response.dart';
+import 'package:news_app/screens/widgets/load_image.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../constants/app_images.dart';
@@ -41,7 +42,11 @@ class PreviewNewsScreen extends StatelessWidget {
                 Center(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(5),
-                    child: loadImage(),
+                    child: LoadImage(
+                      url: article.urlToImage,
+                      height: 200,
+                      fit: BoxFit.fitWidth,
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -130,28 +135,5 @@ class PreviewNewsScreen extends StatelessWidget {
             ),
           ),
         ));
-  }
-
-  Widget loadImage() {
-    if (article.urlToImage == null || article.urlToImage!.isEmpty) {
-      return Image.network(
-        ApiConfig.imageNotFoundPlaceholderUrl,
-        height: 200,
-        fit: BoxFit.fitWidth,
-      );
-    } else if (article.urlToImage!.trim().toLowerCase().endsWith(".svg")) {
-      return Container(
-          height: 200,
-          alignment: Alignment.center,
-          child: SvgPicture.network(
-            article.urlToImage!,
-          ));
-    } else {
-      return Image.network(
-        article.urlToImage!,
-        height: 200,
-        fit: BoxFit.fitWidth,
-      );
-    }
   }
 }
