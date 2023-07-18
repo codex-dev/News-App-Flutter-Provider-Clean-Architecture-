@@ -52,7 +52,7 @@ class _SearchFieldState extends ConsumerState<SearchField> {
         textInputAction: TextInputAction.search,
         onSubmitted: (value) {
           if (value.isNotEmpty) {
-            ref.read(newsProvider.notifier).loadSearchedNews(value);
+            ref.read(newsProvider.notifier).loadSearchedNews(value,1);
           } else {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text(AppStrings.errInputSearchQuery),

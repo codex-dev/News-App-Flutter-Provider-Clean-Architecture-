@@ -21,9 +21,9 @@ class NewsNotifier extends StateNotifier<NewsState> {
         isLoading: false); // initial state; progressbar is hidden
   }
 
-  loadSearchedNews(String query) async {
+  loadSearchedNews(String query, int pageNumber) async {
     state = state.copyWith(isLoading: true);
-    final response = await NewsService().fetchNews(query);
+    final response = await NewsService().fetchNews(query, pageNumber);
     final news = NewsResponse.fromJson(response);
     state = state.copyWith(newsResponse: news, isLoading: false);
   }
